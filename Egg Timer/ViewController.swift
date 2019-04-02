@@ -13,35 +13,43 @@ class ViewController: UIViewController {
     var timer = Timer()
     var seconds = 210
     
+    func setButtons(isTimerRunning:Bool) {
+        lblButtonPlay.isEnabled = !isTimerRunning
+        lblButtonPause.isEnabled = isTimerRunning
+    }
+
     @objc func timerAction() {
-        labelCounter.text = String(seconds)
+        setLabel(seconds: seconds)
         
         if seconds >= 1  {
             seconds -= 1
         } else {
             timer.invalidate()
-            lblButtonPlay.isEnabled = true
-            lblButtonPause.isEnabled = false        }
+            setButtons(isTimerRunning: false)
+        }
     }
-
+    
     @IBOutlet weak var labelCounter: UILabel!
     @IBOutlet weak var lblButtonPlay: UIBarButtonItem!
     @IBOutlet weak var lblButtonPause: UIBarButtonItem!
     
     @IBAction func buttonPause(_ sender: Any) {
         timer.invalidate()
-        lblButtonPlay.isEnabled = true
-        lblButtonPause.isEnabled = false
+        setButtons(isTimerRunning: false)
     }
  
+    func setLabel(seconds:Int) {
+        labelCounter.text = String(seconds)
+    }
+    
     @IBAction func buttonPlay(_ sender: Any) {
         timer=Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        lblButtonPlay.isEnabled = false
-        lblButtonPause.isEnabled = true
+        setButtons(isTimerRunning: true)
     }
     
     @IBAction func buttonReset(_ sender: Any) {
         seconds = 210
+        setLabel(seconds: seconds)
     }
     
     @IBAction func buttonMinus10(_ sender: Any) {
@@ -58,8 +66,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        labelCounter.text = String(seconds)
-        lblButtonPause.isEnabled = false
+        setLabel(seconds: seconds)
+        setButtons(isTimerRunning: false)
     }
 
 
