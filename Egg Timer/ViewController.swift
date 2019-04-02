@@ -64,7 +64,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         setLabel(seconds: seconds)
         setButtons(isTimerRunning: false)
