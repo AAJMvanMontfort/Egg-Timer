@@ -12,7 +12,8 @@ class ViewController: UIViewController {
     
     var timer = Timer()
     var seconds = 210
-    
+
+    // Set the status of the buttons
     func setButtons(isTimerRunning:Bool) {
         lblButtonPlay.isEnabled = !isTimerRunning
         lblButtonPause.isEnabled = isTimerRunning
